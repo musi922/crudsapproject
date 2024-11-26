@@ -66,27 +66,38 @@ sap.ui.define([
             this.byId("updateDialog").close();
         },
 
+        formatDateForOData(date) {
+            if (!date) return null;
+            // If it's already a Date object, use it; otherwise create a new Date
+            const d = date instanceof Date ? date : new Date(date);
+            // Format: YYYY-MM-DD
+            return d.getFullYear() + '-' + 
+                   String(d.getMonth() + 1).padStart(2, '0') + '-' + 
+                   String(d.getDate()).padStart(2, '0');
+        },
+
         onCreate() {
             const ID = this.byId("newProductId").getValue();
             const Name = this.byId("newProductName").getValue();
             const Price = this.byId("newProductPrice").getValue();
             const Rating = this.byId("newProductRating").getValue();
-            const ReleaseDate = this.byId("newProductReleaseDate").getValue();
+            const ReleaseDate = this.formatDateForOData(this.byId("newProductReleaseDate").getValue());
 
             const atomXml = `<?xml version="1.0" encoding="utf-8"?>
             <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
-                <id>http://localhost:5000/odata/Products(${parseInt(ID)})</id>
                 <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
                 <title type="text">${Name}</title>
                 <updated>${new Date().toISOString()}</updated>
-                <author><name /></author>
+                <author><name/></author>
                 <content type="application/xml">
                     <m:properties>
                         <d:ID m:type="Edm.Int32">${parseInt(ID)}</d:ID>
                         <d:Name>${Name}</d:Name>
-                        <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
-                        <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
+                        <d:Description>New Product</d:Description>
                         <d:ReleaseDate m:type="Edm.DateTime">${ReleaseDate}</d:ReleaseDate>
+                        <d:DiscontinuedDate m:null="true"/>
+                        <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
+                        <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
                     </m:properties>
                 </content>
             </entry>`;
@@ -117,23 +128,24 @@ sap.ui.define([
             const Name = this.byId("productNameText").getValue();
             const Price = this.byId("productPriceText").getValue();
             const Rating = this.byId("productRatingText").getValue();
-            const ReleaseDate = this.byId("productReleaseDateText").getValue();
+            const ReleaseDate = this.formatDateForOData(this.byId("productReleaseDateText").getValue());
             const productId = this._selectedProductId;
 
             const atomXml = `<?xml version="1.0" encoding="utf-8"?>
             <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
-                <id>http://localhost:5000/odata/Products(${productId})</id>
                 <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
                 <title type="text">${Name}</title>
                 <updated>${new Date().toISOString()}</updated>
-                <author><name /></author>
+                <author><name/></author>
                 <content type="application/xml">
                     <m:properties>
                         <d:ID m:type="Edm.Int32">${productId}</d:ID>
                         <d:Name>${Name}</d:Name>
-                        <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
-                        <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
+                        <d:Description>Updated Product</d:Description>
                         <d:ReleaseDate m:type="Edm.DateTime">${ReleaseDate}</d:ReleaseDate>
+                        <d:DiscontinuedDate m:null="true"/>
+                        <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
+                        <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
                     </m:properties>
                 </content>
             </entry>`;

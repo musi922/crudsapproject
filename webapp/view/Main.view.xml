@@ -87,7 +87,7 @@
         <Label text="Rating"/>
         <Input id="productRatingText" type="Number"/>
         <Label text="Release Date"/>
-        <DatePicker id="productReleaseDateText"/>
+        <DatePicker id="productReleaseDateText" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
     </VBox>
     <beginButton>
         <Button text="Save" press="onEditPress"/>
@@ -109,7 +109,7 @@
             <Label text="Rating"/>
             <Input id="newProductRating" type="Number"/>
             <Label text="Release Date"/>
-            <DatePicker id="newProductReleaseDate"/>
+            <DatePicker id="newProductReleaseDate" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
         </VBox>
         <beginButton>
             <Button text="Create" press="onCreate"/>

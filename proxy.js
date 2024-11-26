@@ -8,6 +8,9 @@ app.use(cors())
 app.use("/odata", createProxyMiddleware({
     target: "https://services.odata.org/V3/(S(hzn4vwyj2pljjfroa0zssf5s))/OData/OData.svc/",
     changeOrigin: true,
+    pathRewrite: {
+        '^/odata': ''
+    }
 }))
 
 app.listen(5000,()=>{
