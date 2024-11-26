@@ -10,21 +10,83 @@
 
 	<Page
 		title="{i18n>appTitle}"
-		id="page">
+		id="page" class="sapUiSmallMargin">
+		<headerContent>
+		<Toolbar >
+		<Button text="Create Category" press="onShowCategoryDialog"></Button>
+		</Toolbar>
+		</headerContent>
 		<content>
-			<IllustratedMessage
-				title="{i18n>appTitle}"
-				illustrationType="sapIllus-SuccessHighFive"
-				enableVerticalResponsiveness="true"
-				description="{i18n>appDescription}">
-				<additionalContent>
-					<Button
-						id="helloButton"
-						text="{formatter: 'formatter.formatValue', path: 'i18n>btnText'}"
-						press="sayHello" />
-				</additionalContent>
-			</IllustratedMessage>
+			<Table id="odataTable" inset="false" items="{/Categories}">
+			<headerToolbar>
+			<Toolbar >
+			<Title text="Category List"></Title>
+			</Toolbar>
+			</headerToolbar>
+			<columns>
+			<Column >
+			<header>
+			<Label text="Category Id"></Label>
+			</header>
+			</Column>
+			<Column >
+			<header>
+			<Label text="Category Name"></Label>
+			</header>
+			</Column>
+			<Column >
+			<header>
+			<Label text="Actions"></Label>
+			</header>
+			</Column>
+			</columns>
+			<items>
+			<ColumnListItem type="Active" press="onShowData" id="items">
+			<Text text="{ID}"></Text>
+			<Text text="{Name}"/>
+			<Button icon="sap-icon://edit" press="onShowEditingDialog"></Button>
+			</ColumnListItem>
+			</items>
+
+			
+			</Table>
+
+			<Panel id="categoryIdPanel" headerText="Category Detail">
+			<VBox >
+			<Text id="categoryId" text="{ID}"></Text>
+			<Text id="categoryName" text="{Name}"></Text>
+			</VBox>
+			</Panel>
 		</content>
 	</Page>
+
+<Dialog id="updateDialog" title="Update Category">
+    <Label text="Category Name"></Label>
+    <Input value="" id="categoryNameTexts"></Input>
+    <beginButton>
+    <Button text="Save" press="onEditPress"></Button>
+    </beginButton>
+    <endButton>
+    <Button text="Cancel" press="onCloseEditingDialog"></Button>
+    </endButton>
+</Dialog>
+	
+
+    <Dialog id="createCategoryDialog" title="Create Category" type="Message">
+        <content>
+        <VBox >
+        <Label text="Category Id"></Label>
+        <Input id="categoryIdNumber" type="Number" placeholder="Enter your Id"></Input>
+        <Label text="Category Name"></Label>
+        <Input id="categoryNameText" type="Text" placeholder="Enter your Name"></Input>
+        </VBox>
+        </content>
+        <beginButton>
+        <Button text="Create" press="onCreate"></Button>
+        </beginButton>
+        <endButton>
+        <Button text="Cancel" press="onCloseCategoryDialog"></Button>
+        </endButton>
+    </Dialog>
 
 </mvc:View>
