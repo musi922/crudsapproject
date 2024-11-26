@@ -10,54 +10,54 @@ sap.ui.define([
                 defaultBindingMode: "TwoWay",
                 useBatch: false,
                 headers: {
-                    "Content-Type": "application/atom+xml", // Ensure the Content-Type is set to Atom XML
+                    "Content-Type": "application/atom+xml",
                 },
                 json: false,
                 maxDataServiceVersion: "3.0"
             });
             this.getView().setModel(oModel);
-			oModel.read("/Categories",{
-				success(data){
-					console.log(data);
-				}
-			})
+            oModel.read("/Products", {
+                success(data) {
+                    console.log(data);
+                }
+            });
         },
 
         onShowData(event) {
             const Item = event.getSource();
             const bindingContext = Item.getBindingContext();
-            const category = bindingContext.getObject();
+            const product = bindingContext.getObject();
 
-            const categoryIdText = this.byId("categoryId");
-            const categoryName = this.byId("categoryName");
+            this.byId("productId").setText("Product ID: " + product.ID);
+            this.byId("productName").setText("Name: " + product.Name);
+            this.byId("productPrice").setText("Price: " + product.Price);
+            this.byId("productRating").setText("Rating: " + product.Rating);
+            this.byId("productReleaseDate").setText("Release Date: " + product.ReleaseDate);
 
-            categoryIdText.setText("Category Id : " + category.ID);
-            categoryName.setText("Category Name : " + category.Name);
-
-            MessageBox.show("Selected Category " + category.Name);
+            MessageBox.show("Selected Product: " + product.Name);
         },
 
-        onShowCategoryDialog() {
-            this.byId("createCategoryDialog").open();
+        onShowProductDialog() {
+            this.byId("createProductDialog").open();
         },
 
-        onCloseCategoryDialog() {
-            this.byId("createCategoryDialog").close();
+        onCloseProductDialog() {
+            this.byId("createProductDialog").close();
         },
 
         onShowEditingDialog(oEvent) {
-            // Get the selected item's data
             const button = oEvent.getSource();
             const listItem = button.getParent();
             const context = listItem.getBindingContext();
-            const categoryData = context.getObject();
+            const productData = context.getObject();
             
-            // Store the selected category ID for later use
-            this._selectedCategoryId = categoryData.ID;
+            this._selectedProductId = productData.ID;
             
-            // Set the current name in the input field
             const dialog = this.byId("updateDialog");
-            this.byId("categoryNameTexts").setValue(categoryData.Name);
+            this.byId("productNameText").setValue(productData.Name);
+            this.byId("productPriceText").setValue(productData.Price);
+            this.byId("productRatingText").setValue(productData.Rating);
+            this.byId("productReleaseDateText").setValue(productData.ReleaseDate);
             
             dialog.open();
         },
@@ -66,83 +66,79 @@ sap.ui.define([
             this.byId("updateDialog").close();
         },
 
-		onCreate: function () {
-			let ID = this.getView().byId("categoryIdNumber").getValue();
-			let Name = this.getView().byId("categoryNameText").getValue();
-		
-			// Corrected Atom XML payload with a single 'entry' element
-			let atomXml = `<?xml version="1.0" encoding="utf-8"?>
-			<entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
-				<id>http://localhost:5000/odata/Categories(${parseInt(ID)})</id>
-				<category term="ODataDemo.Category" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
-				<link rel="edit" title="Category" href="Categories(${parseInt(ID)})" />
-				<title type="text">${Name}</title>
-				<updated>${new Date().toISOString()}</updated>
-				<author>
-					<name />
-				</author>
-				<content type="application/xml">
-					<m:properties>
-						<d:ID m:type="Edm.Int32">${parseInt(ID)}</d:ID>
-						<d:Name>${Name}</d:Name>
-					</m:properties>
-				</content>
-			</entry>`;
-		
-			console.log(atomXml);
-			
-			// Send the request using fetch with Atom XML
-			fetch("http://localhost:5000/odata/Categories", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/atom+xml",
-				},
-				body: atomXml
-			})
-			.then(response => {
-				if (!response.ok) {
-					return response.text().then(errorText => {
-						throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
-					});
-				}
-				return response.json();  // Assuming the server responds with JSON
-			})
-			.then(data => {
-				MessageBox.success("Category created successfully!");
-				this.onCloseCategoryDialog(); // Close dialog on success
-			})
-			.catch(error => {
-				MessageBox.error("There was an error creating the category: " + error.message);
-			});
-		}
-		
-,		
+        onCreate() {
+            const ID = this.byId("newProductId").getValue();
+            const Name = this.byId("newProductName").getValue();
+            const Price = this.byId("newProductPrice").getValue();
+            const Rating = this.byId("newProductRating").getValue();
+            const ReleaseDate = this.byId("newProductReleaseDate").getValue();
 
-        onEditPress() {
-            const newName = this.byId("categoryNameTexts").getValue();
-            const categoryId = this._selectedCategoryId;
-
-            // Create Atom XML payload for update
             const atomXml = `<?xml version="1.0" encoding="utf-8"?>
             <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
-                <id>http://localhost:5000/odata/Categories(${categoryId})</id>
-                <category term="ODataDemo.Category" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
-                <link rel="edit" title="Category" href="Categories(${categoryId})" />
-                <title type="text">${newName}</title>
+                <id>http://localhost:5000/odata/Products(${parseInt(ID)})</id>
+                <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+                <title type="text">${Name}</title>
                 <updated>${new Date().toISOString()}</updated>
-                <author>
-                    <name />
-                </author>
+                <author><name /></author>
                 <content type="application/xml">
                     <m:properties>
-                        <d:ID m:type="Edm.Int32">${categoryId}</d:ID>
-                        <d:Name>${newName}</d:Name>
+                        <d:ID m:type="Edm.Int32">${parseInt(ID)}</d:ID>
+                        <d:Name>${Name}</d:Name>
+                        <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
+                        <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
+                        <d:ReleaseDate m:type="Edm.DateTime">${ReleaseDate}</d:ReleaseDate>
                     </m:properties>
                 </content>
             </entry>`;
 
-            // Send update request using fetch
-            fetch(`http://localhost:5000/odata/Categories(${categoryId})`, {
+            fetch("http://localhost:5000/odata/Products", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/atom+xml",
+                },
+                body: atomXml
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorText => {
+                        throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
+                    });
+                }
+                MessageBox.success("Product created successfully!");
+                this.onCloseProductDialog();
+                this.getView().getModel().refresh(true);
+            })
+            .catch(error => {
+                MessageBox.error("Error creating product: " + error.message);
+            });
+        },
+
+        onEditPress() {
+            const Name = this.byId("productNameText").getValue();
+            const Price = this.byId("productPriceText").getValue();
+            const Rating = this.byId("productRatingText").getValue();
+            const ReleaseDate = this.byId("productReleaseDateText").getValue();
+            const productId = this._selectedProductId;
+
+            const atomXml = `<?xml version="1.0" encoding="utf-8"?>
+            <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+                <id>http://localhost:5000/odata/Products(${productId})</id>
+                <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+                <title type="text">${Name}</title>
+                <updated>${new Date().toISOString()}</updated>
+                <author><name /></author>
+                <content type="application/xml">
+                    <m:properties>
+                        <d:ID m:type="Edm.Int32">${productId}</d:ID>
+                        <d:Name>${Name}</d:Name>
+                        <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
+                        <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
+                        <d:ReleaseDate m:type="Edm.DateTime">${ReleaseDate}</d:ReleaseDate>
+                    </m:properties>
+                </content>
+            </entry>`;
+
+            fetch(`http://localhost:5000/odata/Products(${productId})`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/atom+xml",
@@ -155,13 +151,12 @@ sap.ui.define([
                         throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
                     });
                 }
-                MessageBox.success("Category updated successfully!");
+                MessageBox.success("Product updated successfully!");
                 this.onCloseEditingDialog();
-                // Refresh the table data
                 this.getView().getModel().refresh(true);
             })
             .catch(error => {
-                MessageBox.error("Error updating category: " + error.message);
+                MessageBox.error("Error updating product: " + error.message);
             });
         }
     });

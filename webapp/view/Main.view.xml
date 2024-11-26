@@ -3,35 +3,47 @@
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:core="sap.ui.core"
-	core:require="{
-		formatter: 'crudproject/model/formatter'
-	}">
+	xmlns:core="sap.ui.core">
 
 	<Page
 		title="{i18n>appTitle}"
 		id="page" class="sapUiSmallMargin">
 		<headerContent>
 		<Toolbar >
-		<Button text="Create Category" press="onShowCategoryDialog"></Button>
+		<Button text="Create Product" press="onShowProductDialog"></Button>
 		</Toolbar>
 		</headerContent>
 		<content>
-			<Table id="odataTable" inset="false" items="{/Categories}">
+			<Table id="odataTable" inset="false" items="{/Products}">
 			<headerToolbar>
 			<Toolbar >
-			<Title text="Category List"></Title>
+			<Title text="Product List"></Title>
 			</Toolbar>
 			</headerToolbar>
 			<columns>
 			<Column >
 			<header>
-			<Label text="Category Id"></Label>
+			<Label text="Product ID"></Label>
 			</header>
 			</Column>
 			<Column >
 			<header>
-			<Label text="Category Name"></Label>
+			<Label text="Name"></Label>
+			</header>
+			</Column>
+			<Column >
+			<header>
+			<Label text="Price"></Label>
+			</header>
+			</Column>
+			<Column >
+			<header>
+			<Label text="Rating"></Label>
+			</header>
+			</Column>
+			<Column >
+			<header>
+			<Label text="Release Date"></Label>
 			</header>
 			</Column>
 			<Column >
@@ -44,6 +56,9 @@
 			<ColumnListItem type="Active" press="onShowData" id="items">
 			<Text text="{ID}"></Text>
 			<Text text="{Name}"/>
+			<Text text="{Price}"/>
+			<Text text="{Rating}"/>
+			<Text text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"/>
 			<Button icon="sap-icon://edit" press="onShowEditingDialog"></Button>
 			</ColumnListItem>
 			</items>
@@ -51,41 +66,56 @@
 			
 			</Table>
 
-			<Panel id="categoryIdPanel" headerText="Category Detail">
+			<Panel id="productPanel" headerText="Product Detail">
 			<VBox >
-			<Text id="categoryId" text="{ID}"></Text>
-			<Text id="categoryName" text="{Name}"></Text>
+			<Text id="productId" text="{ID}"></Text>
+			<Text id="productName" text="{Name}"></Text>
+			<Text id="productPrice" text="{Price}"></Text>
+			<Text id="productRating" text="{Rating}"></Text>
+			<Text id="productReleaseDate" text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"></Text>
 			</VBox>
 			</Panel>
 		</content>
 	</Page>
 
-<Dialog id="updateDialog" title="Update Category">
-    <Label text="Category Name"></Label>
-    <Input value="" id="categoryNameTexts"></Input>
+<Dialog id="updateDialog" title="Update Product">
+    <VBox class="sapUiSmallMargin">
+        <Label text="Product Name"/>
+        <Input id="productNameText"/>
+        <Label text="Price"/>
+        <Input id="productPriceText" type="Number"/>
+        <Label text="Rating"/>
+        <Input id="productRatingText" type="Number"/>
+        <Label text="Release Date"/>
+        <DatePicker id="productReleaseDateText"/>
+    </VBox>
     <beginButton>
-    <Button text="Save" press="onEditPress"></Button>
+        <Button text="Save" press="onEditPress"/>
     </beginButton>
     <endButton>
-    <Button text="Cancel" press="onCloseEditingDialog"></Button>
+        <Button text="Cancel" press="onCloseEditingDialog"/>
     </endButton>
 </Dialog>
 	
 
-    <Dialog id="createCategoryDialog" title="Create Category" type="Message">
-        <content>
-        <VBox >
-        <Label text="Category Id"></Label>
-        <Input id="categoryIdNumber" type="Number" placeholder="Enter your Id"></Input>
-        <Label text="Category Name"></Label>
-        <Input id="categoryNameText" type="Text" placeholder="Enter your Name"></Input>
+    <Dialog id="createProductDialog" title="Create Product" type="Message">
+        <VBox class="sapUiSmallMargin">
+            <Label text="Product ID"/>
+            <Input id="newProductId" type="Number"/>
+            <Label text="Name"/>
+            <Input id="newProductName"/>
+            <Label text="Price"/>
+            <Input id="newProductPrice" type="Number"/>
+            <Label text="Rating"/>
+            <Input id="newProductRating" type="Number"/>
+            <Label text="Release Date"/>
+            <DatePicker id="newProductReleaseDate"/>
         </VBox>
-        </content>
         <beginButton>
-        <Button text="Create" press="onCreate"></Button>
+            <Button text="Create" press="onCreate"/>
         </beginButton>
         <endButton>
-        <Button text="Cancel" press="onCloseCategoryDialog"></Button>
+            <Button text="Cancel" press="onCloseProductDialog"/>
         </endButton>
     </Dialog>
 

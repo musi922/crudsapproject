@@ -6,8 +6,8 @@ const app = express()
 app.use(cors())
 
 app.use("/odata", createProxyMiddleware({
-    target:"https://services.odata.org/V2/(S(jfehxtrowbqxp0n015il4d0r))/OData/OData.svc/",
-    changeOrigin:true,
+    target: "https://services.odata.org/V3/(S(hzn4vwyj2pljjfroa0zssf5s))/OData/OData.svc/",
+    changeOrigin: true,
 }))
 
 app.listen(5000,()=>{
