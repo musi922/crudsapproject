@@ -39,14 +39,11 @@ sap.ui.define([
             const Item = event.getSource();
             const bindingContext = Item.getBindingContext();
             const product = bindingContext.getObject();
+            this.getRouter().navTo("productDetail",{
+                ID:product.ID
+            })
 
-            this.byId("productId").setText("Product ID: " + product.ID);
-            this.byId("productName").setText("Name: " + product.Name);
-            this.byId("productPrice").setText("Price: " + product.Price);
-            this.byId("productRating").setText("Rating: " + product.Rating);
-            this.byId("productReleaseDate").setText("Release Date: " + product.ReleaseDate);
-
-            MessageBox.show("Selected Product: " + product.Name);
+            
         },
 
         onShowProductDialog() {

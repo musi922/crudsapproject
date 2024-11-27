@@ -1,0 +1,17 @@
+<mvc:View 
+    xmlns="sap.m" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    controllerName="crudproject.controller.Detail">
+    <Page  id="productPanels" 
+    showNavButton="true" title="Product Details" navButtonPress="onNavBack" class="sapUiLargeMargin">
+        <content>
+        <VBox >
+        <Text id="productName" text=""></Text>
+        <Text id="productId" text=""></Text>
+        <Text id="productPrice" text=""></Text>
+        <Text id="productRating" text=""></Text>
+        <Text id="productReleaseDate" text=""></Text>
+        </VBox>
+        </content>
+    </Page>
+</mvc:View>
