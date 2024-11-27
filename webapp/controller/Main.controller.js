@@ -170,6 +170,22 @@ sap.ui.define([
             .catch(error => {
                 MessageBox.error("Error updating product: " + error.message);
             });
-        }
+        },
+		onDelete(oEvent){
+			const item = oEvent.getSource().getParent()
+			const context = item.getBindingContext()
+			const productId = context.getObject().ID
+
+			const oModel = this.getView().getModel()
+			oModel.remove(`/Products(${productId})`,{
+				success(){
+					MessageBox.success("Product Deleted successfully!");
+				},
+				error(error){
+					MessageBox.error("Error updating product: " + error.message);
+				}
+
+			})
+		}
     });
 });

@@ -59,7 +59,10 @@
 			<Text text="{Price}"/>
 			<Text text="{Rating}"/>
 			<Text text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"/>
+			<HBox class="gap-2">
 			<Button icon="sap-icon://edit" press="onShowEditingDialog"></Button>
+			<Button icon="sap-icon://delete" press="onDelete"></Button>
+			</HBox>
 			</ColumnListItem>
 			</items>
 
@@ -68,11 +71,11 @@
 
 			<Panel id="productPanel" headerText="Product Detail">
 			<VBox >
-			<Text id="productId" text="{ID}"></Text>
-			<Text id="productName" text="{Name}"></Text>
-			<Text id="productPrice" text="{Price}"></Text>
-			<Text id="productRating" text="{Rating}"></Text>
-			<Text id="productReleaseDate" text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"></Text>
+			<Text id="productId" text=""></Text>
+			<Text id="productName" text=""></Text>
+			<Text id="productPrice" text=""></Text>
+			<Text id="productRating" text=""></Text>
+			<Text id="productReleaseDate" text=""></Text>
 			</VBox>
 			</Panel>
 		</content>
