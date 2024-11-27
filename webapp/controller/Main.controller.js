@@ -1,7 +1,9 @@
 sap.ui.define([
     "./BaseController", "sap/m/MessageBox",
-    "sap/ui/model/odata/v2/ODataModel"
-], function (BaseController, MessageBox, ODataModel) {
+    "sap/ui/model/odata/v2/ODataModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], function (BaseController, MessageBox, ODataModel,Filter,FilterOperator) {
     "use strict";
 
     return BaseController.extend("crudproject.controller.Main", {
@@ -21,6 +23,16 @@ sap.ui.define([
                     console.log(data);
                 }
             });
+        },onSearch(oEvent){
+            let query = oEvent.getParameter("query")
+            let tabel = this.byId("odataTable")
+            let context = tabel.getBinding("items")
+
+            let filters = []
+            if (query) {
+                filters.push(new Filter("Name", FilterOperator.Contains,query))                 
+            }
+            context.filter(filters)
         },
 
         onShowData(event) {
