@@ -10,6 +10,7 @@
 		id="page" >
 		<headerContent>
 		<Toolbar >
+		<Button text="Categories" press="onNavigateToCategories"/>
 		<Button text="Create Product" press="onShowProductDialog"></Button>
 		</Toolbar>
 		</headerContent>

@@ -68,11 +68,22 @@
 					"pattern": "",
 					"name": "main",
 					"target": "main"
-				},{
+				},
+				{
 					"pattern": "productDetail/{ID}",
 					"name": "productDetail",
 					"target":["details"]
 
+				},
+				{
+					"pattern": "categories",
+					"name": "categories",
+					"target": "categoryProducts"
+				},
+				{
+					"pattern": "categoryDetail/{ID}",
+					"name": "categoryDetail",
+					"target": "categoryDetailS"
 				}
 			],
 			"targets": {
@@ -83,6 +94,14 @@
 				"details": {
 					"viewName": "Detail",
 					"viewId": "productDetailView"
+				},
+				"categoryProducts":{
+					"viewName": "Categories",
+					"viewId": "categoryId"
+				},
+				"categoryDetailS":{
+					"viewName": "CategoryDetail",
+					"viewId": "category"
 				}
 			}
 		}

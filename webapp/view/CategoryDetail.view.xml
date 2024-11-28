@@ -1,0 +1,14 @@
+<mvc:View 
+    xmlns="sap.m" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    controllerName="crudproject.controller.CategoryDetail">
+    <Page  id="categoryPanels" 
+    showNavButton="true" title="Category Details" navButtonPress="onNavBack" class="sapUiLargeMargin">
+        <content>
+        <VBox >
+        <Text id="categoryName" text=""></Text>
+        <Text id="categoryId" text=""></Text>
+        </VBox>
+        </content>
+    </Page>
+</mvc:View>

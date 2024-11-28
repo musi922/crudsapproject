@@ -23,7 +23,13 @@ sap.ui.define([
                     console.log(data);
                 }
             });
-        },onSearch(oEvent){
+        },
+        onNavigateToCategories(){
+            let Router = this.getOwnerComponent().getRouter()
+            Router.navTo("categories")
+
+        }
+        ,onSearch(oEvent){
             let query = oEvent.getParameter("query")
             let tabel = this.byId("odataTable")
             let context = tabel.getBinding("items")

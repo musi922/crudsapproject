@@ -1,0 +1,15 @@
+<mvc:View 
+    xmlns="sap.m" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    controllerName="crudproject.controller.Categories">
+    <Page id="categoryPage" title="{i18n>CategoryTitle}" >
+    <content>
+    <SearchField id="categorySearch" search="onSearchCategory"></SearchField>
+    <List id="itemsId" items="{/Categories}" headerText="Category List">
+    <items >
+    <StandardListItem type="Navigation" title="{ID}" description="{Name}" press="onShowDetail"></StandardListItem>
+    </items>
+    </List>
+    </content>
+    </Page>
+</mvc:View>
