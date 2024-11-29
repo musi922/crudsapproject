@@ -5,12 +5,13 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "../model/formatter",
     "sap/ui/core/Fragment",
-    "sap/ui/model/Sorter"
-], function (BaseController, MessageBox, ODataModel,Filter,FilterOperator,formatter,Fragment,Sorter) {
+    "sap/ui/model/Sorter",
+    "sap/ui/model/json/JSONModel",
+], function (BaseController, MessageBox, ODataModel,Filter,FilterOperator,formatter,Fragment,Sorter,JSONModel) {
     "use strict";
 
     return BaseController.extend("crudproject.controller.Main", {
-        onInit() {
+        onInit: function () {
             let oModel = new ODataModel("http://localhost:3000/odata", {
                 defaultBindingMode: "TwoWay",
                 useBatch: false,
@@ -20,13 +21,21 @@ sap.ui.define([
                 json: false,
                 maxDataServiceVersion: "3.0"
             });
+        
             this.getView().setModel(oModel);
+        
             oModel.read("/Products", {
-                success(data) {
-                    console.log(data);
+                urlParameters: {
+                    "$expand": "Supplier"
+                },
+                success: (data) => {
+                    let supplierData = data.results.map(product => product.Supplier ? product.Supplier : {});
+                    let supplierDataModel = new JSONModel(supplierData);
+                    this.getOwnerComponent().setModel(supplierDataModel, "SupplierModel");
                 }
             });
-        },
+        }
+        ,
         onSortButtonPress(){
              if (!this.onSortDialog) {
                 Fragment.load({

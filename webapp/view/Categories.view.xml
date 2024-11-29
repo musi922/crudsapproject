@@ -2,21 +2,24 @@
     xmlns="sap.m" 
     xmlns:mvc="sap.ui.core.mvc" 
     controllerName="crudproject.controller.Categories">
-    <Page id="categoryPage" title="{i18n>CategoryTitle}" >
-    <content>
-    <SearchField id="categorySearch" search="onSearchCategory"></SearchField>
-    <List id="itemsId" items="{/Categories}" headerText="Category List">
-    <items >
-    <StandardListItem type="Navigation" title="{ID}" description="{Name}" press="onShowDetail"></StandardListItem>
-    </items>
-    </List>
-    </content>
-    <footer>
-    <Toolbar >
-    <ToolbarSpacer />
-    <Button text="Here is the footer "></Button>
-    </Toolbar>
-    </footer>
+    <Page id="categoryPage" title="{i18n>CategoryTitle}" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <SearchField id="categorySearch" search="onSearchCategory"></SearchField>
+            <List id="itemsId" items="{SupplierModel>/}" headerText="Supplier List">
+                <items>
+                    <StandardListItem 
+                        type="Navigation" 
+                        title="{SupplierModel>Name}" 
+                        description="{SupplierModel>ID}" 
+                        >
+                    </StandardListItem>
+                </items>
+            </List>
+        </content>
+        <footer>
+            <Toolbar>
+                <Button text="Here is the footer"></Button>
+            </Toolbar>
+        </footer>
     </Page>
-    
 </mvc:View>

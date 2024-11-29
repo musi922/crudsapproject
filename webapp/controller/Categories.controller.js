@@ -8,16 +8,8 @@ sap.ui.define([
     return BaseController.extend("crudproject.Categories.controller", {
 
         onInit: function () {
-            var oModel = new ODataModel("http://localhost:3000/odata",{
-                maxDataServiceVersion:"3.0"
-            });
-            this.getView().setModel(oModel);
-            oModel.read("/Categories",{
-                success(){
-                    console.log("data fetched successfully");
-                    
-                }
-            })
+            var oSupplierModel = this.getOwnerComponent().getModel("SupplierModel");
+            this.getView().setModel(oSupplierModel)
         },
         onSearchCategory(oEvent){
             let query = oEvent.getParameter("query")
