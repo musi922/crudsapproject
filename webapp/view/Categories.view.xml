@@ -11,5 +11,12 @@
     </items>
     </List>
     </content>
+    <footer>
+    <Toolbar >
+    <ToolbarSpacer />
+    <Button text="Here is the footer "></Button>
+    </Toolbar>
+    </footer>
     </Page>
+    
 </mvc:View>

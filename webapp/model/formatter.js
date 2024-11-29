@@ -4,6 +4,14 @@ sap.ui.define(function () {
 	return {
 		formatValue: function (value) {
 			return value && value.toUpperCase();
-		}
+		},
+		formatPriceState: (Price)=>{
+            if (Price>20) {
+                return 'red'				
+            }
+            else{
+                return 'None'
+            }
+        }
 	};
 });

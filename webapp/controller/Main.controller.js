@@ -2,13 +2,16 @@ sap.ui.define([
     "./BaseController", "sap/m/MessageBox",
     "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], function (BaseController, MessageBox, ODataModel,Filter,FilterOperator) {
+    "sap/ui/model/FilterOperator",
+    "../model/formatter",
+    "sap/ui/core/Fragment",
+    "sap/ui/model/Sorter"
+], function (BaseController, MessageBox, ODataModel,Filter,FilterOperator,formatter,Fragment,Sorter) {
     "use strict";
 
     return BaseController.extend("crudproject.controller.Main", {
         onInit() {
-            let oModel = new ODataModel("http://localhost:5000/odata", {
+            let oModel = new ODataModel("http://localhost:3000/odata", {
                 defaultBindingMode: "TwoWay",
                 useBatch: false,
                 headers: {
@@ -24,6 +27,32 @@ sap.ui.define([
                 }
             });
         },
+        onSortButtonPress(){
+             if (!this.onSortDialog) {
+                Fragment.load({
+                    ID:this.getView().getId(),
+                    name:"crudproject.view.SortDialog",
+                    controller:this
+                }).then(oDialog=>{
+                    this.onSortDialog = oDialog                    
+                    this.getView().addDependent(oDialog)
+                    oDialog.open()
+                })
+                
+             }
+             else{
+                this.onSortDialog.open()
+             }
+        },
+        onconfirmSort(oEvent){
+            let osortedItem = oEvent.getParameter("sortItem") //represents the sorting key to be used
+            let bDescending = oEvent.getParameter("sortDescending")  //represent sorting order either ascending or descending
+
+            this.getView().byId("odataTable").getBinding("items").sort(osortedItem ? [new Sorter(osortedItem.getKey(), bDescending)] : [])
+        }
+        ,
+        formatter:formatter,        
+        
         onNavigateToCategories(){
             let Router = this.getOwnerComponent().getRouter()
             Router.navTo("categories")
@@ -117,7 +146,7 @@ sap.ui.define([
                 </content>
             </entry>`;
 
-            fetch("http://localhost:5000/odata/Products", {
+            fetch("http://localhost:3000/odata/Products", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/atom+xml",
@@ -165,7 +194,7 @@ sap.ui.define([
                 </content>
             </entry>`;
 
-            fetch(`http://localhost:5000/odata/Products(${productId})`, {
+            fetch(`http://localhost:3000/odata/Products(${productId})`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/atom+xml",

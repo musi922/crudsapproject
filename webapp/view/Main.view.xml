@@ -10,6 +10,7 @@
 		id="page" >
 		<headerContent>
 		<Toolbar >
+		
 		<Button text="Categories" press="onNavigateToCategories"/>
 		<Button text="Create Product" press="onShowProductDialog"></Button>
 		</Toolbar>
@@ -20,6 +21,8 @@
 			<headerToolbar>
 			<Toolbar >
 			<Title text="Product List"></Title>
+			<ToolbarSpacer />
+			<Button icon="sap-icon://sort" press="onSortButtonPress"/>
 			</Toolbar>
 			</headerToolbar>
 			<columns>
@@ -95,16 +98,23 @@
 
     <Dialog id="createProductDialog" title="Create Product" type="Message">
         <VBox class="sapUiSmallMargin">
-            <Label text="Product ID"/>
-            <Input id="newProductId" type="Number"/>
-            <Label text="Name"/>
+            <Label required="true" text="Product ID"/>
+            <Input valueState="Warning" id="newProductId" type="Number"/>
+            <Label required="true" text="Name"/>
             <Input id="newProductName"/>
-            <Label text="Price"/>
+            <Label required="true" text="Price"/>
             <Input id="newProductPrice" type="Number"/>
-            <Label text="Rating"/>
+            <Label required="true" text="Rating"/>
             <Input id="newProductRating" type="Number"/>
-            <Label text="Release Date"/>
+            <Label required="true" text="Release Date"/>
             <DatePicker id="newProductReleaseDate" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
+			<ComboBox id="idCategory">
+			<items>
+			<core:Item key="0" text="Richard"></core:Item>
+			<core:Item key="0" text="Kevin"></core:Item>
+			<core:Item key="0" text="Angep"></core:Item>
+			</items>
+			</ComboBox>
         </VBox>
         <beginButton>
             <Button text="Create" press="onCreate"/>

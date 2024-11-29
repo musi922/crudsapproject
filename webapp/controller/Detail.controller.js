@@ -12,7 +12,7 @@ sap.ui.define([
             let oRouter = UIComponent.getRouterFor(this);
             oRouter.getRoute("productDetail").attachPatternMatched(this.onProductMatched, this);
             
-            let oModel = new ODataModel("http://localhost:5000/odata", {
+            let oModel = new ODataModel("http://localhost:3000/odata", {
                 maxDataServiceVersion: "3.0"
             });
             this.getView().setModel(oModel);

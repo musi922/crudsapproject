@@ -8,7 +8,7 @@ sap.ui.define([
     return BaseController.extend("crudproject.Categories.controller", {
 
         onInit: function () {
-            var oModel = new ODataModel("http://localhost:5000/odata",{
+            var oModel = new ODataModel("http://localhost:3000/odata",{
                 maxDataServiceVersion:"3.0"
             });
             this.getView().setModel(oModel);
@@ -24,7 +24,7 @@ sap.ui.define([
             let list = this.byId("itemsId")
             let context = list.getBinding("items")
 
-            let aFilters = []
+            let aFilters = [] 
             if (query) {
                 aFilters.push(new Filter("Name", FilterOperator.Contains,query))
                 
