@@ -26,19 +26,12 @@ sap.ui.define([
         
             oModel.read("/Products", {
                 urlParameters: {
-                    "$expand": "Supplier, ProductDetail"
+                    "$expand": "Supplier"
                 },
                 success: (data) => {
-                    console.log(data);
-                    
                     let supplierData = data.results.map(product => product.Supplier ? product.Supplier : {});
-                    let supplierDataModel = new JSONModel(supplierData);                    
+                    let supplierDataModel = new JSONModel(supplierData);
                     this.getOwnerComponent().setModel(supplierDataModel, "SupplierModel");
-
-                    let productDetail = data.results.map(product=>product.ProductDetail ? product.ProductDetail : {})
-                    let productModel = new JSONModel(productDetail)
-                    this.getOwnerComponent().setModel(productModel, "ProductModel");
-                    
                 }
             });
         }
@@ -162,7 +155,7 @@ sap.ui.define([
                 </content>
             </entry>`;
 
-            fetch("http://localhost:4000/odata/Products", {
+            fetch("http://localhost:3000/odata/Products", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/atom+xml",
@@ -210,7 +203,7 @@ sap.ui.define([
                 </content>
             </entry>`;
 
-            fetch(`http://localhost:4000/odata/Products(${productId})`, {
+            fetch(`http://localhost:3000/odata/Products(${productId})`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/atom+xml",
