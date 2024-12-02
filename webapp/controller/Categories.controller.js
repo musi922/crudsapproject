@@ -15,7 +15,8 @@ sap.ui.define([
             let query = oEvent.getParameter("query")
             let list = this.byId("itemsId")
             let context = list.getBinding("items")
-
+            console.log(context);
+            
             let aFilters = [] 
             if (query) {
                 aFilters.push(new Filter("Name", FilterOperator.Contains,query))
