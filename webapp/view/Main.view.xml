@@ -70,9 +70,9 @@
 				<Text text="{Rating}"/>
 				<Text text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"/>
 				<Text text="{Supplier/Name}" />
-				<HBox class="gap-2">
-				<Button icon="sap-icon://edit" press="onShowEditingDialog"></Button>
-				<Button icon="sap-icon://delete" press="onDelete"></Button>
+				<HBox class="buttonGap">
+				<Button icon="sap-icon://edit" press="onShowEditingDialog" text="Edit"></Button>
+				<Button icon="sap-icon://delete" press="onDelete" text="Delete"></Button>
 				</HBox>
 				</ColumnListItem>
 				</items>
