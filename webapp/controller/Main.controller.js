@@ -66,6 +66,10 @@ sap.ui.define([
             let Router = this.getOwnerComponent().getRouter()
             Router.navTo("categories")
 
+        },
+        onNavigateTOCustom(){
+            let Router = this.getOwnerComponent().getRouter()
+            Router.navTo("customControls")
         }
         ,onSearch(oEvent){
             let query = oEvent.getParameter("query")

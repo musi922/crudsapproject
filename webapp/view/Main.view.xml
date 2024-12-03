@@ -13,7 +13,7 @@
 			id="page" class="header sapUiResponsiveMargin">
 			<headerContent>
 			<Toolbar >
-			
+			<Button text="Custom Controls" press="onNavigateTOCustom"></Button>
 			<Button text="Suppliers" press="onNavigateToCategories"/>
 			<Button text="Create Product" press="onShowProductDialog"></Button>
 			</Toolbar>

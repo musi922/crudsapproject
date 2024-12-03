@@ -1,0 +1,20 @@
+<mvc:View
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:custom="crudproject.control"
+    controllerName="crudproject.controller.MyCustomContoller"
+>
+    <Page
+        id="CustomPage"
+        showNavButton="true"
+        title="Custom Page"
+        navButtonPress="onNavBack"
+        class="sapUiLargeMargin"
+    >
+        <content>
+            <VBox>
+                <custom:MyCustomText text="Here is My Custom Text" />
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

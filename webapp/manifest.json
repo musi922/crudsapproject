@@ -89,6 +89,11 @@
 					"pattern": "categoryDetail/{ID}",
 					"name": "categoryDetail",
 					"target": "categoryDetailS"
+				},
+				{
+					"pattern": "customControls",
+					"name": "customControls",
+					"target": "customPage"
 				}
 			],
 			"targets": {
@@ -107,6 +112,10 @@
 				"categoryDetailS":{
 					"viewName": "CategoryDetail",
 					"viewId": "category"
+				},
+				"customPage":{
+					"viewName": "CustomPage",
+					"viewId": "custom"
 				}
 			}
 		}

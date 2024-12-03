@@ -8,6 +8,9 @@
 }
 
 .header{
-    color: red;
-   
+    color: red;  
+}
+.customText{
+    font-size: 20px;
+    color: green;
 }
