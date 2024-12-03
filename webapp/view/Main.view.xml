@@ -3,6 +3,7 @@
 		displayBlock="true"
 		xmlns="sap.m"
 		xmlns:mvc="sap.ui.core.mvc"
+        xmlns:custom="crudproject/customcontrols"
 		xmlns:core="sap.ui.core">
 
 		<Page
@@ -63,7 +64,7 @@
 				</Column>
 				</columns>
 				<items>
-				<ColumnListItem type="Active" press="onShowData" id="items">
+				<ColumnListItem type="Active" press="onShowData" id="items" class="elements">
 				<Text text="{ID}"></Text>
 				<Text text="{Name}"/>
 				<Text text="{Price}"/>
@@ -79,6 +80,7 @@
 
 				
 				</Table>
+				<custom:CustomButton text="Click Me"  />
 			</content>
 		</Page>
 
