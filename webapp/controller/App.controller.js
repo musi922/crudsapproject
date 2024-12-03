@@ -3,7 +3,6 @@ sap.ui.define(["./BaseController"], function (BaseController) {
 
 	return BaseController.extend("crudproject.controller.App", {
 		onInit: function () {
-			// apply content density mode to root view
 			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 		}
 	});

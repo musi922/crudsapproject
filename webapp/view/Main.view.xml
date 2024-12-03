@@ -2,13 +2,15 @@
 		controllerName="crudproject.controller.Main"
 		displayBlock="true"
 		xmlns="sap.m"
+		
 		xmlns:mvc="sap.ui.core.mvc"
         xmlns:custom="crudproject/customcontrols"
-		xmlns:core="sap.ui.core">
+		xmlns:core="sap.ui.core"
+		xmlns:layout="sap.ui.layout">
 
 		<Page
 			title="{i18n>appTitle}"
-			id="page" >
+			id="page" class="header sapUiResponsiveMargin">
 			<headerContent>
 			<Toolbar >
 			
@@ -17,7 +19,7 @@
 			</Toolbar>
 			</headerContent>
 			<content>
-			<SearchField id="searchField" placeholder="Search by Name" search="onSearch"/>
+			<SearchField id="searchField" placeholder="Search by Name" search="onSearch" class="sapUiSmallMargin"/>
 				<Table id="odataTable" inset="false" items="{/Products}">
 				<headerToolbar>
 				<Toolbar >
@@ -79,8 +81,8 @@
 				</items>
 
 				
-				</Table>
-				<custom:CustomButton text="Click Me"  />
+			</Table>
+			<FlexBox ></FlexBox>
 			</content>
 		</Page>
 
