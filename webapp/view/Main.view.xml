@@ -10,16 +10,16 @@
 
 		<Page
 			title="{i18n>appTitle}"
-			id="page" class="header sapUiResponsiveMargin">
+			id="page" class="">
 			<headerContent>
 			<Toolbar >
-			<Button text="Custom Controls" press="onNavigateTOCustom"></Button>
+			<Button text="Custom Controls" id="custom" press="onNavigateTOCustom"></Button>
 			<Button text="Suppliers" press="onNavigateToCategories"/>
 			<Button text="Create Product" press="onShowProductDialog"></Button>
 			</Toolbar>
 			</headerContent>
 			<content>
-			<SearchField id="searchField" placeholder="Search by Name" search="onSearch" class="sapUiSmallMargin"/>
+			<SearchField id="searchField" placeholder="Search by Name" search="onSearch" class=""/>
 				<Table id="odataTable" inset="false" items="{/Products}">
 				<headerToolbar>
 				<Toolbar >

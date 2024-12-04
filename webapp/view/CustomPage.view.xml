@@ -9,12 +9,48 @@
         showNavButton="true"
         title="Custom Page"
         navButtonPress="onNavBack"
-        class="sapUiLargeMargin"
+        class="page"
     >
-        <content>
-            <VBox>
+        <content >
+            <VBox class="sapUiSmallMargin sapUiLargePadding">
                 <custom:MyCustomText text="Here is My Custom Text" />
+                <custom:MyCustomButton text="My Custom Button" press="onPress" />
+                <custom:MyCustomSearchField placeholder="Search in my custom ..."/>
+               
+                <custom:MyCustomTable title="My Custom Table">
+                    <custom:columns>
+                        <custom:MyCustomText text="Name" />
+                        <custom:MyCustomText text="Age" />
+                    </custom:columns>
+                    <custom:rows>
+                                <custom:MyCustomText text="John" />
+                                <custom:MyCustomText text="30" />
+                                <custom:MyCustomText text="Jane" />
+                                <custom:MyCustomText text="25" />
+                    </custom:rows>
+                </custom:MyCustomTable>
+                 <HBox class="Hbox">
+                <custom:MyCustomBox heading="My Box Heading" paragraph="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"/>
+                <custom:MyCustomBox heading="My Box Heading" paragraph="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"/>
+                <custom:MyCustomBox heading="My Box Heading" paragraph="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"/>
+                </HBox>
             </VBox>
         </content>
+        <footer >
+        <Toolbar >
+        <content>
+        <HBox class="Hbox">
+        <Text text="Home Page"></Text>
+        <Text text="Categories Page"></Text>
+        <Text text="Suppliers Page"></Text>
+        </HBox>
+        <ToolbarSpacer />
+        <Button text="subscribe" icon="sap-icon://bell-2" press="onPress" />
+        <Button text="rate me" icon="sap-icon://bell-2" press="onPress" />
+        </content>
+        </Toolbar>
+        </footer>
+
     </Page>
+    
 </mvc:View>
