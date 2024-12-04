@@ -7,7 +7,8 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/ui/model/Sorter",
     "sap/ui/model/json/JSONModel",
-], function (BaseController, MessageBox, ODataModel,Filter,FilterOperator,formatter,Fragment,Sorter,JSONModel) {
+    "sap/f/library"
+], function (BaseController, MessageBox, ODataModel,Filter,FilterOperator,formatter,Fragment,Sorter,JSONModel,fioriLibrary) {
     "use strict";
 
     return BaseController.extend("crudproject.controller.Main", {
@@ -21,6 +22,7 @@ sap.ui.define([
                 json: false,
                 maxDataServiceVersion: "3.0"
             });
+
         
             this.getView().setModel(oModel);
         
@@ -34,6 +36,10 @@ sap.ui.define([
                     this.getOwnerComponent().setModel(supplierDataModel, "SupplierModel");
                 }
             });
+        },
+        onListItemPress(){
+                let flexibleColumn = this.getView().getParent().getParent()
+                flexibleColumn.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded)
         }
         ,
         onSortButtonPress(){
@@ -66,6 +72,10 @@ sap.ui.define([
             let Router = this.getOwnerComponent().getRouter()
             Router.navTo("categories")
 
+        },
+        onNavigateToFlexibleColumn(){
+            const Router = this.getOwnerComponent().getRouter()
+            Router.navTo("flexibleColumn")
         },
         onNavigateTOCustom(){
             let Router = this.getOwnerComponent().getRouter()

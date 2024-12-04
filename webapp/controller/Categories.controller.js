@@ -32,6 +32,12 @@ sap.ui.define([
                 ID:category.ID
             })
 
+        },
+        onEditToggleButtonPress(){
+                let oObjectPage = this.getView().byId("ObjectPageLayout"),
+                    bCurrentShowFooterState = oObjectPage.getShowFooter();
+    
+                oObjectPage.setShowFooter(!bCurrentShowFooterState);
         }
 
     });

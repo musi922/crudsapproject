@@ -13,6 +13,7 @@
 			id="page" class="">
 			<headerContent>
 			<Toolbar >
+			<Button text="Flexible Column" id="flexibleColumn" press="onNavigateToFlexibleColumn"></Button>
 			<Button text="Custom Controls" id="custom" press="onNavigateTOCustom"></Button>
 			<Button text="Suppliers" press="onNavigateToCategories"/>
 			<Button text="Create Product" press="onShowProductDialog"></Button>

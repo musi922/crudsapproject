@@ -23,9 +23,8 @@ sap.ui.define([
         onProductMatched: function(oEvent) {
             const oArguments = oEvent.getParameter("arguments");
             const productId = oArguments.ID;
-            const oModel = this.getView().getModel(); // Retrieve the current model from the view
+            const oModel = this.getView().getModel();
 
-            // Read the product data from the OData service
             oModel.read(`/Products(${productId})`, {
                 success:(data)=> {
                     this.getView().setModel(new JSONModel(data));
