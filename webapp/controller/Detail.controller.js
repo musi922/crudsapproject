@@ -27,7 +27,8 @@ sap.ui.define([
 
             oModel.read(`/Products(${productId})`, {
                 success:(data)=> {
-                    this.getView().setModel(new JSONModel(data));
+                    let oproductModel = new JSONModel(data)
+                    this.getView().setModel(oproductModel,"product")
 
                     this.byId("productId").setText("Product ID: " + data.ID);
                     this.byId("productName").setText("Name: " + data.Name);

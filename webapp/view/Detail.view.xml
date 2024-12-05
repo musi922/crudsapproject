@@ -4,6 +4,9 @@
     controllerName="crudproject.controller.Detail">
     <Page  id="productPanels" 
     showNavButton="true" title="Product Details" navButtonPress="onNavBack" class="sapUiLargeMargin">
+    <Toolbar >
+    <ProgressIndicator id="progress" percentValue="{= ${product>/Rating} * 20}" displayValue="{product>/Rating} of 5" width="100%"></ProgressIndicator>
+    </Toolbar>
         <content>
         <VBox >
         <Text id="productName" text=""></Text>
