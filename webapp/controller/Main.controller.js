@@ -37,6 +37,35 @@ sap.ui.define([
                 }
             });
         },
+        onOpenValueHelp: function () {
+            if (!this._valueHelpDialog) {
+                this._valueHelpDialog = this.byId("valueHelpDialog");
+            }
+            this._valueHelpDialog.open();
+        },
+        
+        onValueHelpSearch: function (oEvent) {
+            const query = oEvent.getParameter("query");
+            const table = this.byId("valueHelpTable");
+            const binding = table.getBinding("items");
+        
+            let filters = [];
+            if (query) {
+                filters.push(new Filter("Name", FilterOperator.Contains, query));
+            }
+            binding.filter(filters);
+        },
+        
+        onValueHelpSelect: function (oEvent) {
+            const selectedName = oEvent.getSource().getBindingContext().getProperty("Name");
+            this.byId("newProductName").setValue(selectedName);
+            this._valueHelpDialog.close();
+        },
+        
+        onCloseValueHelp: function () {
+            this._valueHelpDialog.close();
+        }
+        ,
         onListItemPress(){
                 let flexibleColumn = this.getView().getParent().getParent()
                 flexibleColumn.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded)
@@ -60,9 +89,8 @@ sap.ui.define([
              }
         },
         onconfirmSort(oEvent){
-            let osortedItem = oEvent.getParameter("sortItem") //represents the sorting key to be used
-            let bDescending = oEvent.getParameter("sortDescending")  //represent sorting order either ascending or descending
-
+            let osortedItem = oEvent.getParameter("sortItem") 
+            let bDescending = oEvent.getParameter("sortDescending")
             this.getView().byId("odataTable").getBinding("items").sort(osortedItem ? [new Sorter(osortedItem.getKey(), bDescending)] : [])
         }
         ,

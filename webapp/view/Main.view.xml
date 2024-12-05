@@ -27,6 +27,7 @@
 				<Title text="Product List"></Title>
 				<ToolbarSpacer />
 				<Button icon="sap-icon://sort" press="onSortButtonPress"/>
+				<Button icon="sap-icon://search" press="onOpenValueHelp"></Button>
 				</Toolbar>
 				</headerToolbar>
 				<columns>
@@ -107,32 +108,61 @@
 	</Dialog>
 		
 
-		<Dialog id="createProductDialog" title="Create Product" type="Message">
-			<VBox class="sapUiSmallMargin">
-				<Label required="true" text="Product ID"/>
-				<Input valueState="Warning" id="newProductId" type="Number"/>
-				<Label required="true" text="Name"/>
-				<Input id="newProductName"/>
-				<Label required="true" text="Price"/>
-				<Input id="newProductPrice" type="Number"/>
-				<Label required="true" text="Rating"/>
-				<Input id="newProductRating" type="Number"/>
-				<Label required="true" text="Release Date"/>
-				<DatePicker id="newProductReleaseDate" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
-				<ComboBox id="idCategory">
-				<items>
-				<core:Item key="0" text="Richard"></core:Item>
-				<core:Item key="0" text="Kevin"></core:Item>
-				<core:Item key="0" text="Angep"></core:Item>
-				</items>
-				</ComboBox>
-			</VBox>
-			<beginButton>
-				<Button text="Create" press="onCreate"/>
-			</beginButton>
-			<endButton>
-				<Button text="Cancel" press="onCloseProductDialog"/>
-			</endButton>
-		</Dialog>
+	<Dialog id="createProductDialog" title="Create Product" type="Message">
+    <VBox class="sapUiSmallMargin">
+        <Label required="true" text="Product ID" />
+        <Input valueState="Warning" id="newProductId" type="Number" />
+        
+        <Label required="true" text="Name" />
+        <HBox>
+            <Input id="newProductName" />
+            <Button icon="sap-icon://value-help" press="onOpenValueHelp" tooltip="Select from available products" />
+        </HBox>
+        
+        <Label required="true" text="Price" />
+        <Input id="newProductPrice" type="Number" />
+        
+        <Label required="true" text="Rating" />
+        <Input id="newProductRating" type="Number" />
+        
+        <Label required="true" text="Release Date" />
+        <DatePicker id="newProductReleaseDate" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" />
+        
+        <Label required="true" text="Category" />
+        <ComboBox id="idCategory">
+            <core:Item key="0" text="Richard" />
+            <core:Item key="0" text="Kevin" />
+            <core:Item key="0" text="Angep" />
+        </ComboBox>
+    </VBox>
+    <beginButton>
+        <Button text="Create" press="onCreate" />
+    </beginButton>
+    <endButton>
+        <Button text="Cancel" press="onCloseProductDialog" />
+    </endButton>
+</Dialog>
+
+		<Dialog id="valueHelpDialog" title="Select Product" type="Message">
+    <VBox class="sapUiSmallMargin">
+        <SearchField id="valueHelpSearch" placeholder="Search Products" search="onValueHelpSearch" />
+        <Table id="valueHelpTable" items="{/Products}">
+            <columns>
+                <Column>
+                    <Label text="Product Name" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Active" press="onValueHelpSelect">
+                    <Text text="{Name}" />
+                </ColumnListItem>
+            </items>
+        </Table>
+    </VBox>
+    <beginButton>
+        <Button text="Close" press="onCloseValueHelp" />
+    </beginButton>
+</Dialog>
+
 
 	</mvc:View>
